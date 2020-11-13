@@ -1,12 +1,11 @@
 //$("#load_chocolate") = document.getElementById("#load_chocolate")
 //First option is JQueary
 
-function changeSomeHtml(){
-  $("#load_chocolate").innerHTML = "THIS IS NEW";
+//Functions
+function $requestAboutMe(){
+  unloadContent();
+  $.ajax({url: "AboutMe.html", success: loadContent})
 }
 
-
-function autoplayMusic() {
-  var musicVar = document.getElementById("bg-music").autoplay;
-  document.getElementById("bg-music").innerHTML = musicVar;
-}
+//Events
+$("#load_about_me").click(requestAboutMe);
