@@ -1,0 +1,132 @@
+
+/*<div class="quiz-question-frame">
+  <h1 class="quiz-question">How many blah of a blah blah blah?</h1>
+  <div class="quiz-choices">
+    <a href="https://docs.google.com/document/d/1VNQspKBkG4QdHuy6izIdoOjrCP6EB4UJoM6pUZ95m1E/edit">tech spec</a>
+    <a href="https://github.com/mdoyle210/MyWebsite">site's github</a>
+    <a href="https://www.youtube.com/watch?v=4Kue2mdy6fU">fave vid</a>
+
+  </div>
+</div>*/
+
+/* The box that holds each quiz question */
+
+.text-center {
+  text-align: center;
+}
+
+.quiz-question-frame{
+  background-color: #FFFFFF;
+  color: black;
+  border: 5px solid black;
+  width: 500px;
+  margin: 0px auto;
+  font-family: Verdana;
+  padding: 5px;
+}
+
+.quiz-question-frame h1{
+  background-color: #FFFFFF;
+  color: black;
+  margin: 0px auto;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: normal;
+  padding-bottom: 18px;
+}
+
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 60px; /*this shoves ONLY the text over*/
+  margin-bottom: 20px;  /*this spaces out each answer? */
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 30px; /* this shoves over the button*/
+  height: 25px;
+  width: 25px;
+  background-color: #D5D5D5;
+  border-radius: 0%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #FFBCF6;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #FF00DD;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;*
+
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  /*here is how we get the checkmark AFTER MAKINGG IT A BOX INSTEAD OF A CIRCLE ABOVE*/
+  /*basically. above makes an ugly box.
+  border width makes it a _| sort of thing.
+  bottom three (transofrm rotat) all rotate it the exact same way. i assume for versatility*/
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.submit-answers-button{
+  border: none;
+  font-family: Verdana;
+  color: white;
+  background-color: #FFBCF6;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 10px;
+  align-items: center;
+}
+
+.submit-answers-button:hover{
+  background-color: #FF00DD;
+  display: inline-block;
+  text-decoration: underline;
+  cursor: pointer;
+}
