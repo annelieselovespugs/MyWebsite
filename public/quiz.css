@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-/* The box that holds each quiz question */
+/* The stylish box that holds each quiz question */
 .quiz-question-frame{
   background-color: #FFFFFF;
   color: black;
@@ -14,15 +14,17 @@
   padding-top: 20px;
 }
 
+/* The stylish box that holds the result */
+
 .score-display-frame{
   background-color: #FFFFFF;
-  color: black;
+  color: FF00DD;
   border: 5px solid black;
   width: 500px;
   margin: 0px auto;
   font-family: Verdana;
   padding: 10px;
-  padding-top: 20px;
+  text-align: center;
 }
 
 /* The container */

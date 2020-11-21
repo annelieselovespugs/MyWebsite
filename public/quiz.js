@@ -56,6 +56,6 @@ function calculateScore() {
     }
 
     /*this sets the div "total_result" to contain the score*/
-    document.getElementById("total_result").innerHTML = score+"/5";
+    document.getElementById("total_result").innerHTML = "Result: You got "+score+" out of 5!";
 
   }
