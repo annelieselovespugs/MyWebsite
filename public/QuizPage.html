@@ -2,210 +2,174 @@
 <html>
 
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script> 
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
   <link href="quiz.css" rel="stylesheet">
 </head>
 
 <body>
 
-<h1>This is a quiz.</h1>
+  <!-- RIGHT ANSWER = 0 PINK -->
+   <div class="quiz-question-frame">
+    <span id="result1"></span> <!-- this is the div where the X (for wrong) and CHECKMARK (for right) go after the calculateScore function is run-->
+    <span>1) What is Anneliese's favorite color?</span>
 
-<!-- h1 is the question title. the name refers to the question number. each answer is identified by their index later on-->
-<!-- RIGHT ANSWER = 0 PINK -->
- <div class=quiz-question-frame>
+    <label class="container">pink <!-- text refers to what the user will see-->
+      <input type="radio" name="question1"> <!--the boxes are radio buttons and the name is... the name is the name of the array that gets called?-->
+      <span class="checkmark"></span> <!-- the checkmark class here and the container class containing this is how we get the custom radio buttons-->
+    </label>
 
-  <h1>1) What is Anneliese's favorite color?</h1>
+    <label class="container">blue
+      <input type="radio" name="question1">
+      <span class="checkmark"></span>
+    </label>
 
-  <label class="container">pink <!-- text refers to what the user will see-->
-    <input type="radio" name="question1"> <!--the boxes are radio buttons and the name is... the name of each list of data?-->
-    <span class="checkmark"></span> <!-- the checkmark class here and the container class containing this is how we get the custom radio buttons-->
-  </label>
+    <label class="container">red
+      <input type="radio" name="question1">
+      <span class="checkmark"></span>
+    </label>
 
-  <label class="container">blue
-    <input type="radio" name="question1">
-    <span class="checkmark"></span>
-  </label>
+    <label class="container">yellow
+      <input type="radio" name="question1">
+      <span class="checkmark"></span>
+    </label>
 
-  <label class="container">red
-    <input type="radio" name="question1">
-    <span class="checkmark"></span>
-  </label>
+  </div>
 
-  <label class="container">yellow
-    <input type="radio" name="question1">
-    <span class="checkmark"></span>
-  </label>
+  <br>
 
-</div>
+  <!-- RIGHT ANSWER = 2 PUG -->
+  <div class=quiz-question-frame>
 
-<br>
+    <span id=result2></span>
+    <span>2) What is Anneliese's favorite animal?</span>
 
-<!-- RIGHT ANSWER = 2 PUG -->
-<div class=quiz-question-frame>
+    <label class="container">walrus
+     <input type="radio" name="question2">
+     <span class="checkmark"></span>
+    </label>
 
-  <h1>2) What is Anneliese's favorite animal?</h1>
+    <label class="container">emu
+     <input type="radio" name="question2">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">walrus
-   <input type="radio" name="question2">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">pug
+     <input type="radio" name="question2">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">emu
-   <input type="radio" name="question2">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">squid
+     <input type="radio" name="question2">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">pug
-   <input type="radio" name="question2">
-   <span class="checkmark"></span>
-  </label>
+  </div>
 
-  <label class="container">squid
-   <input type="radio" name="question2">
-   <span class="checkmark"></span>
-  </label>
+  <br>
 
-</div>
+  <!-- RIGHT ANSWER = 3 Chip -->
+  <div class=quiz-question-frame>
 
-<br>
+    <span id=result3></span>
+    <span>3) Which is not the name of one of Anneliese's dogs?</span>
 
-<!-- RIGHT ANSWER = 3 Chip -->
-<div class=quiz-question-frame>
+    <label class="container">Flash
+     <input type="radio" name="question3">
+     <span class="checkmark"></span>
+    </label>
 
-  <h1>3) Which is not the name of one of Anneliese's dogs?</h1>
+    <label class="container">Dexter
+     <input type="radio" name="question3">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">Flash
-   <input type="radio" name="question3">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">Fonda
+     <input type="radio" name="question3">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">Dexter
-   <input type="radio" name="question3">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">Chip
+     <input type="radio" name="question3">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">Fonda
-   <input type="radio" name="question3">
-   <span class="checkmark"></span>
-  </label>
+  </div>
 
-  <label class="container">Chip
-   <input type="radio" name="question3">
-   <span class="checkmark"></span>
-  </label>
+  <br>
 
-</div>
+  <!-- RIGHT ANSWER = 1 WOOBUFFET -->
+  <div class=quiz-question-frame>
 
-<br>
+    <span id=result4></span>
+    <span>4) Which does Anneliese like the most out of these Pokémon?</span>
 
-<!-- RIGHT ANSWER = 1 WOOBUFFET -->
-<div class=quiz-question-frame>
-  <h1>4) Which does Anneliese like the most out of these Pokémon?</h1>
+    <label class="container">Snorlax
+     <input type="radio" name="question4">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">Snorlax
-   <input type="radio" name="question4">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">Wobbuffet
+     <input type="radio" name="question4">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">Wobbuffet
-   <input type="radio" name="question4">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">Mew
+     <input type="radio" name="question4">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">Mew
-   <input type="radio" name="question4">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">Haunter
+     <input type="radio" name="question4">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">Haunter
-   <input type="radio" name="question4">
-   <span class="checkmark"></span>
-  </label>
+  </div>
 
-</div>
+  <br>
 
-<br>
+  <!-- RIGHT ANSWER = 0 MS. KAUFMAN'S INTRO TO PROGRAMMING 1 -->
+  <div class=quiz-question-frame>
 
-<!-- RIGHT ANSWER = 0 MS. KAUFMAN'S INTRO TO PROGRAMMING 1 -->
-<div class=quiz-question-frame>
+    <span id=result5></span>
+    <span>5) What is the most iconic HW CS class?</span>
 
-  <h1>5) What is the most iconic HW CS class?</h1>
+    <label class="container">Ms. Kaufman's Intro to Programming 1
+     <input type="radio" name="question5">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">Ms. Kaufman's Intro to Programming 1
-   <input type="radio" name="question5">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">AP Comp Sci Principles
+     <input type="radio" name="question5">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">AP Comp Sci Principles
-   <input type="radio" name="question5">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">AP Comp Sci A
+     <input type="radio" name="question5">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">AP Comp Sci A
-   <input type="radio" name="question5">
-   <span class="checkmark"></span>
-  </label>
+    <label class="container">that DS where you study video games
+     <input type="radio" name="question5">
+     <span class="checkmark"></span>
+    </label>
 
-  <label class="container">that DS where you study video games
-   <input type="radio" name="question5">
-   <span class="checkmark"></span>
-  </label>
+  </div>
 
-</div>
+  <br>
 
-<br>
+  <div class="text-center"> <!--this just center the button-->
+   <button id="submit_answers" class="submit-answers-button" align="center">submit!</button> <!--this creates the button (and styles it)-->
+  </div>
 
-<!--Loads jquery-->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script> 
-<!--Loads JavaScript-->
-<!-- <script src="quiz.js"></script> -->
+  <br>
 
-<div class="text-center">
-<!--  <button id="submit-answers" onclick="calculateScore" class="submit-answers-button" align="center">submit!</button>-->
-<button onclick="calculateScore()" class="submit-answers-button" align="center">submit!</button>
-</div>
+  <div id="total_result"><br></div>
 
-<div id="result"></div>
-
-<script>
-
-
-function calculateScore() {
-    var score =0;
-
-    var input = document.getElementsByName('question1'); /*put the name of the question here*/
-    if(input[0].checked){ /*put the index of the right answer into the []*/
-      score++;
-    }
-
-    var input = document.getElementsByName('question2'); /*put the name of the question here*/
-    if(input[2].checked){ /*put the index of the right answer into the []*/
-      score++;
-    }
-
-    var input = document.getElementsByName('question3'); /*put the name of the question here*/
-    if(input[3].checked){ /*put the index of the right answer into the []*/
-      score++;
-    }
-
-    var input = document.getElementsByName('question4'); /*put the name of the question here*/
-    if(input[1].checked){ /*put the index of the right answer into the []*/
-      score++;
-    }
-
-    var input = document.getElementsByName('question5'); /*put the name of the question here*/
-    if(input[0].checked){ /*put the index of the right answer into the []*/
-      score++;
-    }
-
-    document.getElementById("result").innerHTML = score+"/5";
-  }
-</script>
-
-<br>
 
 </body>
 
-
+<script src="quiz.js"></script>
 
 </html>
