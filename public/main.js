@@ -20,5 +20,6 @@ document.getElementById("fun_and_games").onclick = function(){
   $.ajax({url: "AboutMe.html", success: loadContent})
 }*/
 
+
 //Events
 //$("#load_about_me").click(requestAboutMe);
