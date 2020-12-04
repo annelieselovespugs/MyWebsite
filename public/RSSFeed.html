@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+
+<!--Loads jquery-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+<!--!!!Credit to  SummersRemote (William Summers) on GitHub for the xmlToJson() function!!! https://github.com/SummersRemote/xmlToJSON -->
+<script type="text/javascript" src="Resources/xmlToJSON/lib/xmlToJSON.js"></script>
+<!--Allows you to load your css from a separate css file-->
+<link href="main.css" rel="stylesheet">
+
+
+<head>
+  <style>
+    body {
+      background-image: url('Resources/Patterns/fancy-pants.jpg');
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="placeForRSS"></div>
+
+  <script>
+    function getTheRSS() {
+      var otherName = "abc";
+      $.ajax({
+        dataType: "xml",
+        data: {
+          "name": otherName
+        },
+        url: "https://cors-anywhere.herokuapp.com/http://www.extinctblog.org/extinct?format=RSS",
+        success: function(data) {
+          showTheRSS(data);
+        }
+      });
+    }
+
+
+    function showTheRSS(result) {
+
+      var theFeed = xmlToJSON.parseString(result);
+      console.log(theFeed);
+      $("#placeForRSS").html(theFeed);
+    }
+
+    getTheRSS();
+  </script>
+
+  <button onclick="getTheRSS">Load RSS</button>
+
+</body>
+
+</html>
