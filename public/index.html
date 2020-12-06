@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html>
 
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+
 <!--Allows you to load your css from a separate css file-->
 <link href="main.css" rel="stylesheet">
 
@@ -83,6 +87,12 @@
       <font color="floralwhite">Using JSON page</font>
     </a>
 
+    <font color="floralwhite">•</font>
+
+    <a href="RSSFeed.html">
+      <font color="floralwhite">RSS Feed</font>
+    </a>
+
 
     <img src="https://firebasestorage.googleapis.com/v0/b/imalonerdottie.appspot.com/o/dog.jpg?alt=media&token=e5c6d7ae-bd96-40d3-a482-03e208a14fb0"></img>
 
@@ -100,10 +110,55 @@
   </p>
 
 
+
+  <input type="text" id="horse_input"></input>
+  <button id="vote_horse">Add a horse breed</button>
+  <button id="show_latest_horse">Latest horse breed</button>
+  <p>
+  <h3>
+    <div style="display:inline-block;">Latest Breed:</div>
+    <div style="display:inline-block;" id="display_horse"></div>
+  </h3>
+  </p>
+
+
+
+
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+
+
+
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBPlhzIVcMQyqC3_K3DmQNuFIXsxN524xE",
+      authDomain: "imalonerdottie.firebaseapp.com",
+      databaseURL: "https://imalonerdottie.firebaseio.com",
+      projectId: "imalonerdottie",
+      storageBucket: "imalonerdottie.appspot.com",
+      messagingSenderId: "306860072303",
+      appId: "1:306860072303:web:ab300327b3bed08170dc9a"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    //var firestore = firebase.firestore();
+  </script>
+
+
+
+
+
   <!--Loads jquery-->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script> 
   <!--Loads JavaScript-->
   <script src="main.js"></script>
+
+  <script src="database.js"></script>
 </body>
 
 </html>

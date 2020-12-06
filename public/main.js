@@ -1,4 +1,4 @@
-var cookie = document.cookie;
+/*var cookie = document.cookie;
 var cookieType = "sugar";
 if (!cookie){
   cookie = 1;
@@ -13,7 +13,7 @@ else{
   cookie++;
   document.cookie = cookie;
 }
-alert("You have visited the site " + cookie + " time(s), so you get a " + cookieType + " cookie.")
+alert("You have visited the site " + cookie + " time(s), so you get a " + cookieType + " cookie.")*/
 
 
 
