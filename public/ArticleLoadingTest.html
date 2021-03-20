@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<!--Allows you to load your css from a separate css file-->
+<!--<link href="main.css" rel="stylesheet">-->
+
+
+<head>
+</head>
+
+<body>
+
+
+  <div id="the-articles"></div>
+
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+
+  <!--<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>-->
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBPlhzIVcMQyqC3_K3DmQNuFIXsxN524xE",
+      authDomain: "imalonerdottie.firebaseapp.com",
+      databaseURL: "https://imalonerdottie.firebaseio.com",
+      projectId: "imalonerdottie",
+      storageBucket: "imalonerdottie.appspot.com",
+      messagingSenderId: "306860072303",
+      appId: "1:306860072303:web:ab300327b3bed08170dc9a"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var firestore = firebase.firestore();
+    //var database = firebase.database();
+  </script>
+
+
+
+
+  <!--This is where the articles are displayed after being fetched from the server-->
+  <div id="articles"></div>
+
+  <script>
+    function sortArticleList() { //This function is called after retrieving all articles from the server
+      var newArticleList = new Array(); //Holder where we'll be placing the new values
+      newArticleList.push(articleList[0]); //adds the first value of articleList to newArticleList
+
+      var placeInNAL = 0; //Used to hold the current location in newArticleList i the loop below
+      var hasBeenAdded = false; //Used to ensure that elements aren't added twice in the loop below
+
+      for (var k = 1; k < articleList.length; k++) { //for every value in articleList
+        while ((placeInNAL < newArticleList.length) && (hasBeenAdded == false)) {
+          if (newArticleList[placeInNAL]['PubDate'] != undefined) { //Console throws an error without this loop b/c it's worried about newArticleList[placeInNAL] being undefined
+            if (articleList[k]['PubDate'].seconds > newArticleList[placeInNAL]['PubDate'].seconds) { //Sorts articles --> newest at the front, oldest at the back
+              newArticleList.splice(placeInNAL, 0, articleList[k]);
+              hasBeenAdded = true;
+            }
+          }
+          placeInNAL++;
+        }
+
+        if (hasBeenAdded == false) { //If you go through the whole loop above without finding an older article, just chuck the current article at the end
+          newArticleList.push(articleList[k]);
+        }
+        placeInNAL = 0; //reset the holder variables
+        hasBeenAdded = false; //reset the holder variables
+      }
+
+      //Code for sorting by tag below !!!UNTESTED!!!
+      /*var articleListWithTags = new Array();
+
+      for (int h = 0; h < newArticleList.length; h++) {
+        if (newArticleList[h]['Tag'] != undefined) {
+          if (newArticleList[h]['Tag'].includes("Science")) { //IF 'TAG' IS AN ARRAY, USE THIS LINE AND DELETE THE OTHER
+            if (newArticleList[h]['Tag'] == "Science") { //IF 'TAG' IS A STRING, USE THIS LINE AND DELETE THE OTHER
+              articleListWithTags.push(newArticleList[h]);
+            }
+          }
+        }*/
+
+
+      articleList = newArticleList; //IF NOT SORTING BY TAG, USE THIS LINE
+      //articleList = articleListWithTags; //IF SORTING BY TAG, USE THIS LINE
+
+      displayArticleList();
+    }
+
+
+    function displayArticleList() {
+      //Design team's code should probably go here! Lmk if you have any questions or if I need to rewrite anything! -Anneliese :)
+      console.log(articleList);
+    }
+
+    //This is an Array (different from ArrayList) that stores all article objects
+    var articleList = new Array();
+    firestore.collection("articles1").get().then(function(listOfArticles) {
+      listOfArticles.forEach(function(article) {
+        articleList.push(article.data());
+      });
+      sortArticleList();
+    });
+
+
+    //showOnPage();
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
+  <!--Loads jquery-->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"> </script>
+  <!--Loads JavaScript-->
+  <!--<script src="ArticleLoadingTest.js"></script>-->
+
+</body>
+
+</html>
