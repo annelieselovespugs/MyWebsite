@@ -1,0 +1,192 @@
+<!--To do: need a way to give Wacky Bucks to a visiting user-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
+
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Wacky Bucks</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container" style="width: 650px;">
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1></h1>
+        <hr />
+        <br />
+        <div id="content">
+          <h4 id="candidateName"></h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 text-center">
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <button id="connectWallet" class="btn btn-primary btn-lg">Connect wallet by clicking the MetaMask icon and clicking "Not Connected"</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 text-center">
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <button id="interactionTest" class="btn btn-primary btn-lg">Test Contract</button>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- https://raw.githubusercontent.com/ChainSafe/web3.js/v1.3.4/dist/web3.min.js -->
+  <script src="js/web3.min.js"></script>
+  <script src="js/contracts/globals.js"></script>
+  <script src="js/contracts/all.js"></script>
+  <script>
+    // THIS NEEDS to match your Ganache localhost
+    let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+
+
+    async function startApp() {
+      const accounts = await ethereum.request({
+        method: 'eth_accounts'
+      });
+      try {
+        let blockNumber = await ethereum.getBlockNumber()
+        console.log('current block number : ', blockNumber)
+      } catch (e) {
+        console.log(e.message)
+      }
+
+      // Should probably restart app when provider changes!
+      const provider = await detectEthereumProvider();
+      if (provider) {
+        console.log("Provider: ", provider);
+        // From now on, this should always be true:
+        // provider === window.ethereum
+        //startApp(provider); // initialize your app
+      } else {
+        console.log('Install MetaMask!');
+      }
+
+
+      /**********************************************************/
+      /* Handle chain (network) and chainChanged (per EIP-1193) */
+      /**********************************************************/
+
+      const chainId = await ethereum.request({
+        method: 'eth_chainId'
+      });
+      handleChainChanged(chainId);
+
+      ethereum.on('chainChanged', handleChainChanged);
+
+      function handleChainChanged(_chainId) {
+        // We recommend reloading the page, unless you must do otherwise
+        console.log(_chainId);
+        //window.location.reload();
+      }
+
+      /***********************************************************/
+      /* Handle user accounts and accountsChanged (per EIP-1193) */
+      /***********************************************************/
+
+      let currentAccount = null;
+      ethereum
+        .request({
+          method: 'eth_accounts'
+        })
+        .then(handleAccountsChanged)
+        .catch((err) => {
+          // Some unexpected error.
+          // For backwards compatibility reasons, if no accounts are available,
+          // eth_accounts will return an empty array.
+          console.error(err);
+        });
+
+      // Note that this event is emitted on page load.
+      // If the array of accounts is non-empty, you're already
+      // connected.
+      ethereum.on('accountsChanged', handleAccountsChanged);
+
+      // For now, 'eth_accounts' will continue to always return an array
+      function handleAccountsChanged(accounts) {
+        if (accounts.length === 0) {
+          // MetaMask is locked or the user has not connected any accounts
+          console.log('Please connect to MetaMask.');
+        } else if (accounts[0] !== currentAccount) {
+          currentAccount = accounts[0];
+          ACTIVE_WALLET = currentAccount;
+          // Do any other work!
+        }
+      }
+
+      /*********************************************/
+      /* Access the user's accounts (per EIP-1102) */
+      /*********************************************/
+
+      // You should only attempt to request the user's accounts in response to user
+      // interaction, such as a button click.
+      // Otherwise, you popup-spam the user like it's 1999.
+      // If you fail to retrieve the user's account(s), you should encourage the user
+      // to initiate the attempt.
+      document.getElementById('connectWallet').onclick = connect;
+
+      // While you are awaiting the call to eth_requestAccounts, you should disable
+      // any buttons the user can click to initiate the request.
+      // MetaMask will reject any additional requests while the first is still
+      // pending.
+      function connect() {
+        ethereum
+          .request({
+            method: 'eth_requestAccounts'
+          })
+          .then(handleAccountsChanged)
+          .catch((err) => {
+            if (err.code === 4001) {
+              // EIP-1193 userRejectedRequest error
+              // If this happens, the user rejected the connection request.
+              console.log('Please connect to MetaMask.');
+            } else {
+              console.error(err);
+            }
+          });
+      }
+
+
+      document.getElementById('interactionTest').onclick = talkWithContract;
+
+      async function talkWithContract() {
+        // Eth Contract takes the ABI
+        ACTIVE_CONTRACT = new web3.eth.Contract(WBContractABI, WBAddress);
+        /*var settingName = await ACTIVE_CONTRACT.methods.setName("Stephen Hawking").send({
+          from: ACTIVE_WALLET
+        });
+        var name = await ACTIVE_CONTRACT.methods.getName().call();*/
+        var bal = await ACTIVE_CONTRACT.methods.balanceOf(ACTIVE_WALLET).call();
+        console.log(bal);
+      }
+    }
+
+    startApp();
+
+    // https://docs.metamask.io/guide/ethereum-provider.html#methods
+  </script>
+</body>
+
+</html>
