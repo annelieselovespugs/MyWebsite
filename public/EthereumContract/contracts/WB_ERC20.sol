@@ -11,9 +11,12 @@ contract WB_ERC20 is Context, IERC20 {
     mapping (address => mapping (address => uint256)) private _allowances;
 
     uint256 private _totalSupply;
+    uint256 private _totalInCirculation;
 
     string private _name;
     string private _symbol;
+
+    address private _lastPersonToGetFreeTokens;
 
     /**
      * @dev Sets the values for {name} and {symbol}.
@@ -35,7 +38,7 @@ contract WB_ERC20 is Context, IERC20 {
         // Total Supply of ALL tokens
         // (Note: we create all of them at contract start instead of minting)
         _totalSupply = totalTokenCount;
-
+        _totalInCirculation = 0;
     }
 
     /**
@@ -67,7 +70,7 @@ contract WB_ERC20 is Context, IERC20 {
      * {IERC20-balanceOf} and {IERC20-transfer}.
      */
     function decimals() public view virtual returns (uint8) {
-        return 1; // changed from 18
+        return 8; // changed from 18
     }
 
     /**
@@ -96,8 +99,8 @@ contract WB_ERC20 is Context, IERC20 {
         _transfer(_msgSender(), recipient, amount);
         return true;
     }
-    
-    
+
+
     /**
      * @dev See {IERC20-allowance}.
      */
@@ -178,6 +181,26 @@ contract WB_ERC20 is Context, IERC20 {
 
         return true;
     }
+
+
+    function giveSomeToken(address walletToSend, bool lotto) public virtual returns (uint256){
+        _lastPersonToGetFreeTokens = walletToSend;
+
+        if ((_balances[msg.sender] == 0) || (msg.sender != _lastPersonToGetFreeTokens)){
+            uint256 tokensToGive = _totalSupply / 1000000;
+            _balances[msg.sender] = tokensToGive;
+            _totalInCirculation += tokensToGive;
+        }
+
+        else if (lotto == true){
+            _totalInCirculation += _balances[msg.sender];
+            _balances[msg.sender] += _balances[msg.sender];
+        }
+
+        return (_balances[msg.sender]);
+    }
+
+
 
     /**
      * @dev Moves tokens `amount` from `sender` to `recipient`.

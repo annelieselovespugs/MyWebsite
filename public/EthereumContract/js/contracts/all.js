@@ -1,7 +1,7 @@
 // Grab the contract application binaray interface from
 // http://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.7.4+commit.3f05b770.js
 // Go to Solidity Compiler -> Compile -> Compilation Details -> Contract ABI
-var WBAddress = "0x53976a916e6c546838315EEE85feDF7B24265518";
+var WBAddress = "0x4785C5Fb4a7a4FF2621A0677584e220400DdD774";
 
 
 var WBContractABI = [
@@ -98,6 +98,30 @@ var WBContractABI = [
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "walletToSend",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "lotto",
+				"type": "bool"
+			}
+		],
+		"name": "giveSomeToken",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "nonpayable",
